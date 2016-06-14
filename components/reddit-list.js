@@ -30,12 +30,15 @@ class RedditList extends Component {
 
   renderRow(rowData){
     return (
-      <TouchableHighlight onPress={() => {
-        this.props.navigator.push({
-          name: 'RedditComments',
-          passProps: {}
-        });
-      }}>
+      <TouchableHighlight
+        onPress={() => {
+          this.props.navigator.push({
+            name: 'RedditComments',
+            passProps: {}
+          });
+        }}
+        underlayColor={'#ddd'}
+      >
         <View style={styles.row}>
           <Image style={styles.image} source={{uri: rowData.thumbnail}} />
           <View style={styles.rightColumn}>

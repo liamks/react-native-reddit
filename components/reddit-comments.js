@@ -36,8 +36,8 @@ class RedditComments extends Component {
       <View style={styles.outerContainer}>
         <RedditNavigationBar
           title="Reddit"
-          showBackButton={true}
-          back={() => this.props.navigator.pop() }/>
+          back={this.props.navigator.pop}
+        />
         <View style={styles.container}>
           <Text>Article!</Text>
           <ListView

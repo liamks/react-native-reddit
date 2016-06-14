@@ -16,12 +16,19 @@ class RedditNavigationBar extends Component {
     return (
       <View>
         <View style={styles.toolbar}>
+          {/* Left Button */}
           <TouchableHighlight
-            style={[styles.button, this.props.showBackButton && styles.hide]}
-            onPress={()=>{}}>
-            <Text style={ styles.buttonText }>Back</Text>
+            style={[styles.button, !this.props.back && styles.hide]}
+            onPress={this.props.back}
+            underlayColor={'#CFE3FA'}
+          >
+            <Text style={ styles.buttonText }>{'\u2039'} Back</Text>
           </TouchableHighlight>
           <Text style={styles.title}>{this.title}</Text>
+          {/* Right Button, helps title stay centered! */}
+          <TouchableHighlight style={[styles.button, styles.hide]}>
+            <Text></Text>
+          </TouchableHighlight>
         </View>
       </View>
     )
@@ -36,25 +43,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   hide: {
-    width: 0,
-    height: 0
+    opacity: 0
   },
   title: {
-    width: 100,
     fontSize: 18,
     color: '#fff',
     textAlign: 'center',
     flex: 1
   },
   button: {
-    height:60,
-    justifyContent: 'center',
-    backgroundColor: '#efefef',
-    alignItems: 'center',
-    justifyContent: 'center'
+    width: 80,
+    backgroundColor: '#CFE3FA',
+    alignItems: 'center'
   },
   buttonText: {
-    fontSize:20
+    fontSize:18,
+    color: '#fff',
+    backgroundColor: '#CFE3FA',
+    padding: 0,
+    margin: 0
   }
 });
 
