@@ -34,10 +34,10 @@ class RedditList extends Component {
         onPress={() => {
           this.props.navigator.push({
             name: 'RedditComments',
-            passProps: {}
+            passProps: rowData
           });
         }}
-        underlayColor={'#ddd'}
+        underlayColor='#ddd'
       >
         <View style={styles.row}>
           <Image style={styles.image} source={{uri: rowData.thumbnail}} />
@@ -52,7 +52,7 @@ class RedditList extends Component {
   render() {
     return (
       <View style={styles.outerContainer}>
-        <RedditNavigationBar title="Reddit"  showBackButton={false}/>
+        <RedditNavigationBar title="Reddit" />
         <View style={styles.container}>
           <ListView
             enableEmptySections={true}

@@ -20,7 +20,7 @@ class RedditNavigationBar extends Component {
           <TouchableHighlight
             style={[styles.button, !this.props.back && styles.hide]}
             onPress={this.props.back}
-            underlayColor={'#CFE3FA'}
+            underlayColor='#CFE3FA'
           >
             <Text style={ styles.buttonText }>{'\u2039'} Back</Text>
           </TouchableHighlight>
@@ -42,9 +42,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     flexDirection: 'row'
   },
-  hide: {
-    opacity: 0
-  },
   title: {
     fontSize: 18,
     color: '#fff',
@@ -62,6 +59,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#CFE3FA',
     padding: 0,
     margin: 0
+  },
+  hide: {
+    opacity: 0
   }
 });
 
