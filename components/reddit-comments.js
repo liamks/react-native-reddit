@@ -6,27 +6,34 @@ import {
   ListView,
   Image
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import RedditNavigationBar from './reddit-nav-bar.js';
-
-const REDDIT_COMMENTS = [
-  {text: 'lol'},
-  {text: 'ftw'}
-];
+import { fetchComments } from '../actions/reddit-actions.js';
 
 class RedditComments extends Component {
   constructor(props){
     super(props);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(REDDIT_COMMENTS)
+      dataSource: ds.cloneWithRows(this.props.comments)
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchComments(this.props);
+  };
+
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(nextProps.comments)
+    });
   }
 
   renderRow(rowData){
     return (
       <View style={styles.row}>
-        <Text>{rowData.text}</Text>
+        <Text>{rowData.body}</Text>
       </View>
     );
   }
@@ -50,6 +57,23 @@ class RedditComments extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return { comments: state.comments };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchComments: (redditStory) => {
+      return fetchComments(redditStory)(dispatch);
+    }
+  }
+}
+
+RedditComments = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RedditComments);
 
 const styles = StyleSheet.create({
   outerContainer: {

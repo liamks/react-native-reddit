@@ -1,22 +1,21 @@
-import fetch from 'isomorphic-fetch';
+import { RECEIVE_POSTS, RECEIVE_COMMENTS } from '../actions/reddit-actions.js';
 
-export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-
-const receivePosts = (json) => {
-  return {
-    type: RECEIVE_POSTS,
-    posts: json.data.children.map(child => child.data),
-    receivedAt: Date.now()
+const redditStoriesReducer = (state=[], action) => {
+  switch(action.type){
+    case RECEIVE_POSTS:
+      return action.posts;
+    default:
+      return state;
   }
 }
 
-const fetchPosts = () => {
-  return dispatch => {
-
-    return fetch('https://www.reddit.com/top.json')
-      .then(response => response.json())
-      .then(json => dispatch(receivePosts(json)))
+const redditCommentsReducer = (state=[], action) => {
+  switch (action.type) {
+    case RECEIVE_COMMENTS:
+      return action.comments
+    default:
+      return state;
   }
 }
 
-export { fetchPosts };
+export { redditStoriesReducer, redditCommentsReducer };

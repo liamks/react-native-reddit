@@ -7,6 +7,7 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import RedditNavigationBar from './reddit-nav-bar.js';
 
@@ -24,8 +25,14 @@ class RedditList extends Component {
     super(props);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(REDDIT_STORIES)
+      dataSource: ds.cloneWithRows(props.posts)
     };
+  }
+  
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(nextProps.posts)
+    });
   }
 
   renderRow(rowData){
@@ -64,6 +71,13 @@ class RedditList extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return { posts: state.reddit };
+}
+
+RedditList = connect(mapStateToProps)(RedditList);
+
 
 const styles = StyleSheet.create({
   outerContainer: {
