@@ -28,7 +28,7 @@ class RedditList extends Component {
       dataSource: ds.cloneWithRows(props.posts)
     };
   }
-  
+
   componentWillReceiveProps = (nextProps) => {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(nextProps.posts)
@@ -82,18 +82,20 @@ RedditList = connect(mapStateToProps)(RedditList);
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#ccc'
   },
   container: {
     flex: 1,
   },
   row: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-    paddingTop: 4,
-    paddingBottom: 4,
+    marginLeft: 4,
+    marginRight: 4,
+    marginTop: 4,
+    padding: 4,
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderRadius: 2
   },
   rightColumn: {
     flex: 1,
